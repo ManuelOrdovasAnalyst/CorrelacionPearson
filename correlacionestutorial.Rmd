@@ -1,0 +1,62 @@
+---
+title: "Correlación de Pearson"
+output: html_notebook
+---
+
+### 1. Introducción:
+
+La correlación de Pearson es un método que permite establecer **relación lineal** entre variables, su resultado es un número que varía de -1 a 1, números negativos indican una relación inversa entre variables, positivo una relación directa, y cunato más cercanos a 0, menos relación lineal es encontrada entre variables.
+
+### 2. Cálculo:
+
+La correlación de Pearson se calcula mediante 
+
+<img src="https://proxy.duckduckgo.com/iur/?f=1&image_host=http%3A%2F%2Frodas.us.es%2Ffile%2F6ee22068-3a5f-b78e-06a3-b06ace495ead%2F1%2Fpractica2_SCORM.zip%2Fimages%2Fpic002.jpg&u=https://rodas5.us.es/file/6ee22068-3a5f-b78e-06a3-b06ace495ead/1/practica2_SCORM.zip/images/pic002.jpg" width="300" class="center" style="display: block;margin-left:auto;margin-right: auto;"/>
+
+#### 2.1. Función en R
+En esta fórmula **x** e **y** son variables cuantitativas de longitud **N**, en R puede definirse como (siempre y cuando ambas variables tengan la misma longitud y sin valores perdidos):
+
+```{r}
+corr <- function(x, y){
+  n <- length(x)
+  res<-(sum(x*y)-sum(x)*sum(y)/n)/(sqrt(sum(x^2)-(sum(x)^2)/n)*sqrt(sum(y^2)-(sum(y)^2)/n))
+  return(res)
+  }
+```
+
+A través de las siguientes dos variables, observamos una buena relación lineal entre **x** e **y**
+
+```{r echo=FALSE,fig.align='right'}
+library(ggplot2)
+
+n <- 100
+x <- rnorm(n)
+y <- x+rnorm(n)*0.2
+
+datos<-as.data.frame(cbind(x,y))
+```
+#### 2.2. Representación gráfica
+
+```{r echo=FALSE}
+print(as.data.frame(t(datos)))
+ggplot(datos, aes(x, y) ) +
+  geom_point() + geom_smooth(method = "loess") + 
+  ggtitle("Relación entre x e y")
+```
+
+### 3. Resultado
+
+A través de la fórmula previamente descrita, calculamos la correlación entre ambas variables:
+
+```{r}
+resultado <- corr(x,y)
+resultado
+```
+
+Obtenemos una gran correlación de `r resultado` entre variables.
+
+
+-----------------------------------------------------------------------------
+
+<img src="http://blogs.reed.edu/datablog/files/2015/09/RStudio-Ball.png" width="100" class="center" style="display: block;margin-left:auto;margin-right: auto;"/>
+
