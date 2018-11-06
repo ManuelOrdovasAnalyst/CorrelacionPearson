@@ -6,4 +6,4 @@ El código en R también está descrito.
 
 ### Dirección del documento:
 
-http://htmlpreview.github.io/?
+http://htmlpreview.github.io/?https://github.com/ManuelOrdovasAnalyst/CorrelacionPearson/blob/master/correlacionestutorial.nb.html
